@@ -2,20 +2,26 @@ package daos;
 
 import com.skillmatch.daos.AddressDao;
 import com.skillmatch.pojos.Address;
-import com.skillmatch.util.AbstractTest;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by agermenos on 5/15/16.
  */
-public class AddressDaoTester extends AbstractTest {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("/spring/config/beanlocations.xml")
+public class AddressDaoTest {
+    @Autowired
     AddressDao addressDao;
 
-    public AddressDaoTester(){
-        super("/spring/config/beanlocations.xml");
-    }
-
+    @Test
     public void testCRUD(){
         Address address = new Address();
         address.setStreet("Finnian Way");
@@ -28,7 +34,7 @@ public class AddressDaoTester extends AbstractTest {
         address = new Address();
         address.setId(returnId);
         address = addressDao.read(address).get(0);
-        assert(address != null);
+        assertTrue(address != null);
 
         address.setStreet("Fonnian Way");
         addressDao.update(address);
@@ -37,15 +43,9 @@ public class AddressDaoTester extends AbstractTest {
 
         address = new Address();
         address.setId(returnId);
-        List<Address> emptyList= (List<Address>) addressDao.read(address);
+        List<Address> emptyList= addressDao.read(address);
 
-        assert (emptyList==null);
-
+        assertTrue (emptyList.size()==0);
     }
 
-    public static void main(String args[]){
-        AddressDaoTester addressDaoTester = new AddressDaoTester();
-        addressDaoTester.addressDao = (AddressDao) addressDaoTester.getContext().getBean("addressDao");
-        addressDaoTester.testCRUD();
-    }
 }
