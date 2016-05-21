@@ -65,4 +65,12 @@ public class Catalog {
         result = 31 * result + (parentId != null ? parentId.hashCode() : 0);
         return result;
     }
+
+    public Catalog(){
+
+    }
+
+    public Catalog(String text) {
+        this.text = text;
+    }
 }

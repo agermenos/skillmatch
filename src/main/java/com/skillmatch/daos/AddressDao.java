@@ -34,15 +34,11 @@ public class AddressDao {
 
     @Transactional
     public void update(Address address){
-        //sessionFactory.getCurrentSession().getTransaction().begin();
         sessionFactory.getCurrentSession().update(address);
-        //sessionFactory.getCurrentSession().getTransaction().commit();
     }
 
     @Transactional
     public void delete(Address address){
-        //sessionFactory.getCurrentSession().getTransaction().begin();
         sessionFactory.getCurrentSession().delete(address);
-        //sessionFactory.getCurrentSession().getTransaction().commit();
     }
 }
