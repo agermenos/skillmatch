@@ -7,7 +7,7 @@
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <tx:annotation-driven />
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <!-- Hibernate session factory -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
@@ -34,4 +34,6 @@
           class = "org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name = "sessionFactory" ref = "sessionFactory" />
     </bean>
+
+    <tx:annotation-driven/>
 </beans>
