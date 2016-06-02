@@ -7,13 +7,13 @@ import java.sql.Date;
  * Created by agermenos on 6/2/16.
  */
 @Entity
-@Table(name = "skill", schema = "skillmatch", catalog = "skillmatch")
-public class Skill {
+@Table(name = "user_skill", schema = "skillmatch", catalog = "skillmatch")
+public class UserSkill {
     private Integer id;
-    private Catalog description;
     private Date dateAdded;
+    private User user;
+    private SkillLevel skillLevel;
     private Catalog status;
-    private Catalog type;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -24,11 +24,6 @@ public class Skill {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    @ManyToOne
-    @JoinColumn(name="skill_desc")
-    public Catalog getDescription() {return description;}
-    public void setDescription (Catalog description) {this.description = description;}
 
     @Basic
     @Column(name = "date_added", nullable = true)
@@ -41,37 +36,42 @@ public class Skill {
     }
 
     @ManyToOne
+    @JoinColumn(name="skill_level_id")
+    public SkillLevel getSkillLevel() {return skillLevel;}
+    public void setSkillLevel (SkillLevel skillLevel) {this.skillLevel = skillLevel;}
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    public User getUser() {return user;}
+    public void setUser (User user) {this.user = user;}
+
+    @ManyToOne
     @JoinColumn(name="status_id")
     public Catalog getStatus() {return status;}
     public void setStatus (Catalog status) {this.status = status;}
-
-    @ManyToOne
-    @JoinColumn(name="skill_type")
-    public Catalog getType() {return type;}
-    public void setType (Catalog type) {this.type = type;}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Skill skill = (Skill) o;
+        UserSkill userSkill = (UserSkill) o;
 
-        if (!id.equals(skill.id)) return false;
-        if (!description.equals(skill.description)) return false;
-        if (!dateAdded.equals(skill.dateAdded)) return false;
-        if (!status.equals(skill.status)) return false;
-        return type.equals(skill.type);
+        if (!id.equals(userSkill.id)) return false;
+        if (!dateAdded.equals(userSkill.dateAdded)) return false;
+        if (!user.equals(userSkill.user)) return false;
+        if (!skillLevel.equals(userSkill.skillLevel)) return false;
+        return status.equals(userSkill.status);
 
     }
 
     @Override
     public int hashCode() {
         int result = id.hashCode();
-        result = 31 * result + description.hashCode();
         result = 31 * result + dateAdded.hashCode();
+        result = 31 * result + user.hashCode();
+        result = 31 * result + skillLevel.hashCode();
         result = 31 * result + status.hashCode();
-        result = 31 * result + type.hashCode();
         return result;
     }
 }
