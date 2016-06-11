@@ -1,7 +1,7 @@
 package com.skillmatch.pojos;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by agermenos on 6/2/16.

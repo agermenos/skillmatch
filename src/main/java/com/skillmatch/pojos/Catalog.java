@@ -12,6 +12,10 @@ public class Catalog {
     private String text;
     private Integer parentId;
 
+    public static final String GENERAL_SKILL_LEVELS = "Skill Levels Catalog";
+    public static final String SKILL_STATUS = "Skill Status Catalog";
+    public enum SKILL_LEVEL_GRAL {basic, intermediate, advanced};
+
     @Id
     @SequenceGenerator(name = "pk_sequence", sequenceName = "skillmatch.catalog_id_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_sequence")
