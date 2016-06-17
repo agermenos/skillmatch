@@ -1,5 +1,7 @@
 package com.skillmatch.rest;
 
+import com.google.gson.Gson;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -18,8 +20,21 @@ public class MyResource {
      * @return String that will be returned as a text/plain response.
      */
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String getIt() {
-        return "Got it!";
+        Gson gson = new Gson();
+        return gson.toJson(new MyResponse("You're the best!", "Who's the best", "By Myself"));
+    }
+}
+
+class MyResponse {
+    String response;
+    String title;
+    String footer;
+
+    public MyResponse(String response, String title, String footer) {
+        this.response = response;
+        this.title = title;
+        this.footer = footer;
     }
 }
