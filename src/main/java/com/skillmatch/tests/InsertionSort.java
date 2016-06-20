@@ -28,6 +28,7 @@ public class InsertionSort {
                 input[j] = input[j-1];
                 input[--j] = temp;
             }
+            printInput(input);
         }
     }
 }
