@@ -1,7 +1,5 @@
 package com.skillmatch.tests;
 
-import org.springframework.expression.spel.ast.Operator;
-
 import java.util.Stack;
 
 /**
