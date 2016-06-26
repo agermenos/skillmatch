@@ -19,22 +19,17 @@ public class SubTreeChecker {
     private void checkSubTree(Node mainTree, Node subTree) {
         //Search for node that's same in subTree than in mainTree
         System.out.println("Checking " + mainTree.id);
-        while (true) {
-            if (mainTree.id.equals(subTree.id)) {
-                System.out.println ("Node " +  subTree.id +
-                        " found in mainTree... is equal? " + checkSameBranch(mainTree, subTree));
-            }
-            else {
-                if (mainTree.leftNode!=null) {
-                    checkSubTree(mainTree.leftNode, subTree);
-                }
-                if (mainTree.rightNode!=null) {
-                    checkSubTree(mainTree.rightNode, subTree);
-                }
-            }
-            return;
+        if (mainTree.id.equals(subTree.id)) {
+            System.out.println ("Node " +  subTree.id +
+                    " found in mainTree... is equal? " + checkSameBranch(mainTree, subTree));
         }
-
+        if (mainTree.leftNode!=null) {
+            checkSubTree(mainTree.leftNode, subTree);
+        }
+        if (mainTree.rightNode!=null) {
+            checkSubTree(mainTree.rightNode, subTree);
+        }
+        return;
     }
 
     private boolean checkSameBranch(Node mainTree, Node subTree) {
