@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @javax.persistence.Entity
 @javax.persistence.Table(name = "address", schema = "skillmatch", catalog = "skillmatch")
-public class Address {
+public final class Address {
     private Integer id;
     private String street;
     private String number;

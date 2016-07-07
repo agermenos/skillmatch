@@ -1,6 +1,7 @@
 package com.skillmatch.pojos;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by agermenos on 5/15/16.
@@ -68,6 +69,21 @@ public class User {
 
     public void setImageId(Integer imageId) {
         this.imageId = imageId;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_skill", catalog = "skillmatch", joinColumns = {
+            @JoinColumn(name = "USER_ID", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "SKILL_LEVEL_ID",
+                    nullable = false, updatable = false) })
+    private List<Skill> skillList;
+
+    public List<Skill> getSkillList() {
+        return skillList;
+    }
+
+    public void setSkillList(List<Skill> skillList) {
+        this.skillList = skillList;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.skillmatch.rest;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -22,7 +23,7 @@ public class MyResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getIt() {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(new MyResponse("You're the best!", "Who's the best", "By Myself"));
     }
 }
