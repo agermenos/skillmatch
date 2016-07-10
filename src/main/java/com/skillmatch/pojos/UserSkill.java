@@ -1,7 +1,7 @@
 package com.skillmatch.pojos;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Created by agermenos on 6/2/16.
@@ -16,7 +16,9 @@ public class UserSkill {
     private Catalog status;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @SequenceGenerator(name = "pk_sequence", sequenceName = "skillmatch.user_skill_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_sequence")
+    @Column(name = "id", unique = true, nullable = false)
     public Integer getId() {
         return id;
     }

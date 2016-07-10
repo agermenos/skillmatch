@@ -13,7 +13,9 @@ public class SkillLevel {
     private Catalog level;
 
     @Id
-    @Column(name = "id", nullable = false)
+    @SequenceGenerator(name = "pk_sequence", sequenceName = "skillmatch.skill_level_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_sequence")
+    @Column(name = "id", unique = true, nullable = false)
     public Integer getId() {
         return id;
     }

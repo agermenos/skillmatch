@@ -13,8 +13,6 @@ import java.util.List;
 public class UserService {
     @Autowired
     UserDao userDao;
-    @Autowired
-    UserSkillDao userSkillDao;
 
     public User getUser(int userId) {
         User user = new User();
@@ -22,7 +20,7 @@ public class UserService {
         List<User> users = userDao.read(user);
         assert (users.size()<1 && users.size()>0);
 
-
         return users.get(0);
     }
+
 }
