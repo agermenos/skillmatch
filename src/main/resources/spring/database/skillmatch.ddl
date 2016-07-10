@@ -51,5 +51,16 @@ CREATE TABLE user_skill
 );
 CREATE UNIQUE INDEX address_id_uindex ON address (id);
 CREATE UNIQUE INDEX catalog_id_uindex ON catalog (id);
+ALTER TABLE contact ADD FOREIGN KEY (user_id) REFERENCES contact (id);
+ALTER TABLE contact ADD FOREIGN KEY (contact_type_id) REFERENCES catalog (id);
+ALTER TABLE skill ADD FOREIGN KEY (skill_desc) REFERENCES ;
+ALTER TABLE skill ADD FOREIGN KEY (skill_type) REFERENCES ;
+ALTER TABLE skill ADD FOREIGN KEY (status_id) REFERENCES ;
+ALTER TABLE skill_level ADD FOREIGN KEY (skill_id) REFERENCES skill (id);
+ALTER TABLE skill_level ADD FOREIGN KEY (level_id) REFERENCES ;
 CREATE UNIQUE INDEX skill_level_id_uindex ON skill_level (id);
+ALTER TABLE "user" ADD FOREIGN KEY (address_id) REFERENCES address (id);
+ALTER TABLE user_skill ADD FOREIGN KEY (user_id) REFERENCES "user" (id);
+ALTER TABLE user_skill ADD FOREIGN KEY (skill_level_id) REFERENCES skill_level (id);
+ALTER TABLE user_skill ADD FOREIGN KEY (status_id) REFERENCES ;
 CREATE UNIQUE INDEX user_skill_id_uindex ON user_skill (id);
