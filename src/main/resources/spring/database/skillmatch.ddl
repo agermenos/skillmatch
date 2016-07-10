@@ -19,6 +19,20 @@ CREATE TABLE contact
     contact_type_id INTEGER NOT NULL,
     contact_type_value VARCHAR
 );
+CREATE TABLE skill
+(
+    id INTEGER PRIMARY KEY NOT NULL,
+    skill_desc INTEGER NOT NULL,
+    skill_type INTEGER,
+    date_added DATE,
+    status_id INTEGER
+);
+CREATE TABLE skill_level
+(
+    id INTEGER PRIMARY KEY NOT NULL,
+    skill_id INTEGER NOT NULL,
+    level_id INTEGER NOT NULL
+);
 CREATE TABLE "user"
 (
     id INTEGER PRIMARY KEY NOT NULL,
@@ -27,5 +41,15 @@ CREATE TABLE "user"
     address_id INTEGER NOT NULL,
     image_id INTEGER
 );
+CREATE TABLE user_skill
+(
+    id INTEGER PRIMARY KEY NOT NULL,
+    user_id INTEGER NOT NULL,
+    skill_level_id INTEGER NOT NULL,
+    date_added DATE,
+    status_id INTEGER
+);
 CREATE UNIQUE INDEX address_id_uindex ON address (id);
 CREATE UNIQUE INDEX catalog_id_uindex ON catalog (id);
+CREATE UNIQUE INDEX skill_level_id_uindex ON skill_level (id);
+CREATE UNIQUE INDEX user_skill_id_uindex ON user_skill (id);
