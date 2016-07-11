@@ -16,7 +16,7 @@ public final class Address {
     private String lineExtra;
 
     @Id
-    @SequenceGenerator(name = "pk_sequence", sequenceName = "skillmatch.address_id_seq")
+    @SequenceGenerator(name = "pk_sequence", sequenceName = "skillmatch.address_id_seq", allocationSize=1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_sequence")
     @Column(name = "id", unique = true, nullable = false)
     public Integer getId() {

@@ -25,7 +25,7 @@ public class CatalogService {
         return catalog;
     }
 
-    private Catalog getCatalogElement(String name) {
+    public Catalog getCatalogElement(String name) {
         Catalog catalog = new Catalog(name);
         List<Catalog> singleElementCatalog = catalogDao.read(catalog);
         if (singleElementCatalog!=null && singleElementCatalog.size()>0) {
@@ -41,17 +41,17 @@ public class CatalogService {
         List<Catalog> singleElementCatalog = catalogDao.read(parent);
         assert singleElementCatalog.size()<=1;
         Catalog children = new Catalog();
-        children.setParentId(parent.getId());
+        children.setParent(parent);
         return catalogDao.read(children);
     }
 
     public void killCatalog (String catalogName) {
         Catalog catalog = createOrGetCatalog(catalogName);
         Catalog childDto = new Catalog();
-        childDto.setParentId(catalog.getId());
+        childDto.setParent(catalog);
         List<Catalog> catalogChildren = catalogDao.read(childDto);
         catalogChildren.stream().forEach(child -> catalogDao.delete(child));
-        catalogDao.delete(catalog);
+        //catalogDao.delete(catalog);
     }
 
     public void createCatalog(String catalogName, List<String>values) {
@@ -59,9 +59,9 @@ public class CatalogService {
 
         values.stream().forEach(value -> {
             Catalog child = new Catalog(value);
-            child.setParentId(catalog.getId());
+            child.setParent(catalog);
             child = createOrGetCatalog(value);
-            child.setParentId(catalog.getId());
+            child.setParent(catalog);
             catalogDao.update(child);
         });
     }

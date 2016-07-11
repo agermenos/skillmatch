@@ -38,9 +38,8 @@ public class UserSkillDaoTest {
         Address address = createAddress("3420 Finnian Way", "Apartment 408", "94568");
         User user = createUser("Alejandro", "Geremnos", address);
         SkillLevel skillLevel = createSkillLevel("programming", "java", "advanced");
-        skillLevelDao.create(skillLevel);
+        Catalog status = catalogService.getCatalogElement("live");
         UserSkill userSkill = new UserSkill();
-        Catalog status = catalogService.getCatalog("live").get(0);
         userSkill.setStatus(status);
         userSkill.setDateAdded(new Date());
         userSkill.setSkillLevel(skillLevel);
@@ -52,7 +51,7 @@ public class UserSkillDaoTest {
     private SkillLevel createSkillLevel(String type, String description, String level) {
         Skill skill = createSkll (description, type);
         catalogService.createCatalog("level", Arrays.asList(new String[] {"beginner", "intermediate", "advanced", "master"}));
-        Catalog catalogLevel = catalogService.getCatalog(level).get(0);
+        Catalog catalogLevel = catalogService.getCatalogElement(level);
         SkillLevel skillLevel = new SkillLevel();
         skillLevel.setLevel(catalogLevel);
         skillLevel.setSkill(skill);
@@ -65,10 +64,10 @@ public class UserSkillDaoTest {
         catalogService.createCatalog("status", Arrays.asList(new String[]{"live", "created", "deleted"}));
         catalogService.createCatalog("skills", Arrays.asList(new String[]{description}));
         catalogService.createCatalog("skillType", Arrays.asList(new String[] {type}));
-        Catalog skillCatalog = catalogService.getCatalog(description).get(0);
-        Catalog skillTypeCatlog = catalogService.getCatalog(type).get(0);
-        Catalog status = catalogService.getCatalog("live").get(0);
-        skillTypeCatlog.setParentId(skillCatalog.getId());
+        Catalog skillCatalog = catalogService.getCatalogElement(description);
+        Catalog skillTypeCatlog = catalogService.getCatalogElement(type);
+        Catalog status = catalogService.getCatalogElement("live");
+        skillTypeCatlog.setParent(skillCatalog);
         catalogDao.update(skillTypeCatlog);
         skill.setDescription(skillCatalog);
         skill.setType(skillTypeCatlog);

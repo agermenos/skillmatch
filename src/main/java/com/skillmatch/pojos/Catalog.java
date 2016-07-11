@@ -1,6 +1,7 @@
 package com.skillmatch.pojos;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by agermenos on 5/15/16.
@@ -10,7 +11,7 @@ import javax.persistence.*;
 public class Catalog {
     private Integer id;
     private String text;
-    private Integer parentId;
+    private Catalog parent;
 
     public static final String GENERAL_SKILL_LEVELS = "Skill Levels Catalog";
     public static final String SKILL_STATUS = "Skill Status Catalog";
@@ -38,35 +39,29 @@ public class Catalog {
         this.text = text;
     }
 
-    @javax.persistence.Basic
-    @javax.persistence.Column(name = "parent_id", nullable = true)
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
-    }
+    @ManyToOne
+    @JoinColumn(name="parent_id")
+    public Catalog getParent() {return parent;}
+    public void setParent (Catalog parent) {this.parent = parent;}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Catalog that = (Catalog) o;
+        Catalog catalog = (Catalog) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (text != null ? !text.equals(that.text) : that.text != null) return false;
-        if (parentId != null ? !parentId.equals(that.parentId) : that.parentId != null) return false;
+        if (!id.equals(catalog.id)) return false;
+        if (!text.equals(catalog.text)) return false;
+        return parent != null ? parent.equals(catalog.parent) : catalog.parent == null;
 
-        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (text != null ? text.hashCode() : 0);
-        result = 31 * result + (parentId != null ? parentId.hashCode() : 0);
+        int result = id.hashCode();
+        result = 31 * result + text.hashCode();
+        result = 31 * result + (parent != null ? parent.hashCode() : 0);
         return result;
     }
 
