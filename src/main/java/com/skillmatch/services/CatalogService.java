@@ -41,7 +41,7 @@ public class CatalogService {
         List<Catalog> singleElementCatalog = catalogDao.read(parent);
         assert singleElementCatalog.size()<=1;
         Catalog children = new Catalog();
-        children.setParent(parent);
+        children.setParent(singleElementCatalog.get(0));
         return catalogDao.read(children);
     }
 

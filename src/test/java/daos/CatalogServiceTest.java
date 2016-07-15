@@ -27,7 +27,7 @@ public class CatalogServiceTest {
         String[] countries = {"US", "UK", "Mexico", "Brazil", "India"};
         catalogService.createCatalog("Countries", Arrays.asList(countries));
         List<Catalog> countryCatalog = catalogService.getCatalog("Countries");
-        assertTrue(countryCatalog.size()==6);
+        assertTrue(countryCatalog.size()==5);
         catalogService.killCatalog("Countries");
         countryCatalog = catalogService.getCatalog("Countries");
         assertTrue(countryCatalog.size()==0);
