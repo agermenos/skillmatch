@@ -18,7 +18,7 @@ public abstract class GeneralDao<T> {
     public T get() { return t; }
 
     @Autowired
-    private SessionFactory sessionFactory;
+    protected SessionFactory sessionFactory;
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public void create (T t){

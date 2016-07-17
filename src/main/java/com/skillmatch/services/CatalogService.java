@@ -38,11 +38,13 @@ public class CatalogService {
     public List<Catalog> getCatalog(String catalog){
         Catalog parent = new Catalog();
         parent.setText(catalog);
-        List<Catalog> singleElementCatalog = catalogDao.read(parent);
-        assert singleElementCatalog.size()<=1;
-        Catalog children = new Catalog();
-        children.setParent(singleElementCatalog.get(0));
-        return catalogDao.read(children);
+        List<Catalog> parentList = catalogDao.read(parent);
+        if (parentList.size()>1) {
+            System.out.println ("ERROR getCatalog: parentList is bigger than 1.");
+        }
+        Catalog child = new Catalog();
+        child.setParent(parentList.get(0));
+        return catalogDao.read(child);
     }
 
     public void killCatalog (String catalogName) {

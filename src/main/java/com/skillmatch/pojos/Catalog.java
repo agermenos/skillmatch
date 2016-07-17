@@ -1,11 +1,11 @@
 package com.skillmatch.pojos;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * Created by agermenos on 5/15/16.
  */
+
 @javax.persistence.Entity
 @javax.persistence.Table(name = "catalog", schema = "skillmatch", catalog = "skillmatch")
 public class Catalog {
