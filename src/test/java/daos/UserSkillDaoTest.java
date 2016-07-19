@@ -67,7 +67,7 @@ public class UserSkillDaoTest {
         Catalog skillCatalog = catalogService.getCatalogElement(description);
         Catalog skillTypeCatlog = catalogService.getCatalogElement(type);
         Catalog status = catalogService.getCatalogElement("live");
-        skillTypeCatlog.setParent(skillCatalog);
+        skillTypeCatlog.setParentId(skillCatalog.getId());
         catalogDao.update(skillTypeCatlog);
         skill.setDescription(skillCatalog);
         skill.setType(skillTypeCatlog);

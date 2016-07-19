@@ -26,10 +26,10 @@ public class CatalogServiceTest {
     public void test(){
         String[] countries = {"US", "UK", "Mexico", "Brazil", "India"};
         catalogService.createCatalog("Countries", Arrays.asList(countries));
-        List<Catalog> countryCatalog = catalogService.getCatalog("Countries");
+        List<Catalog> countryCatalog = catalogService.getCatalogByParent("Countries");
         assertTrue(countryCatalog.size()>0);
         catalogService.killCatalog("Countries");
-        countryCatalog = catalogService.getCatalog("Countries");
+        countryCatalog = catalogService.getCatalogByParent("Countries");
         assertTrue(countryCatalog.size()==0);
     }
 }

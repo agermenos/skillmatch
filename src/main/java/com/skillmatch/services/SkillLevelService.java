@@ -25,7 +25,7 @@ public class SkillLevelService {
 
     public void createSkill(String strSkill, String[] levels){
         catalogService.createCatalog(Catalog.GENERAL_SKILL_LEVELS, Arrays.asList(new String[]{"basic","intermediate","advanced"}));
-        List<Catalog> catalogList = catalogService.getCatalog(Catalog.SKILL_STATUS);
+        List<Catalog> catalogList = catalogService.getCatalogByParent(Catalog.SKILL_STATUS);
         Skill skill = new Skill();
         skill.setDateAdded(new Date());
         skill.setStatus(catalogList.get(0));

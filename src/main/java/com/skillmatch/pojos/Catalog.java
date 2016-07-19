@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Catalog {
     private Integer id;
     private String text;
-    private Catalog parent;
+    private Integer parentId;
 
     public static final String GENERAL_SKILL_LEVELS = "Skill Levels Catalog";
     public static final String SKILL_STATUS = "Skill Status Catalog";
@@ -38,11 +38,15 @@ public class Catalog {
     public void setText(String text) {
         this.text = text;
     }
+    @javax.persistence.Basic
+    @javax.persistence.Column(name = "parent_id", nullable = true, length = -1)
+    public Integer getParentId() {
+        return parentId;
+    }
 
-    @ManyToOne
-    @JoinColumn(name="parent_id")
-    public Catalog getParent() {return parent;}
-    public void setParent (Catalog parent) {this.parent = parent;}
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -51,17 +55,17 @@ public class Catalog {
 
         Catalog catalog = (Catalog) o;
 
-        if (!id.equals(catalog.id)) return false;
-        if (!text.equals(catalog.text)) return false;
-        return parent != null ? parent.equals(catalog.parent) : catalog.parent == null;
+        if (id != null ? !id.equals(catalog.id) : catalog.id != null) return false;
+        if (text != null ? !text.equals(catalog.text) : catalog.text != null) return false;
+        return parentId != null ? parentId.equals(catalog.parentId) : catalog.parentId == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + text.hashCode();
-        result = 31 * result + (parent != null ? parent.hashCode() : 0);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + (parentId != null ? parentId.hashCode() : 0);
         return result;
     }
 

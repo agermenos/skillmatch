@@ -35,25 +35,26 @@ public class CatalogService {
         else return null;
     }
 
-    public List<Catalog> getCatalog(String catalog){
+    public List<Catalog> getCatalogByParent(String strParent){
         Catalog parent = new Catalog();
-        parent.setText(catalog);
+        parent.setText(strParent);
         List<Catalog> parentList = catalogDao.read(parent);
+        if (parentList.size()==0) return parentList; //parentlist is empty... no need doing anything else
         if (parentList.size()>1) {
             System.out.println ("ERROR getCatalog: parentList is bigger than 1.");
         }
         Catalog child = new Catalog();
-        child.setParent(parentList.get(0));
+        child.setParentId(parentList.get(0).getId());
         return catalogDao.read(child);
     }
 
     public void killCatalog (String catalogName) {
         Catalog catalog = createOrGetCatalog(catalogName);
         Catalog childDto = new Catalog();
-        childDto.setParent(catalog);
+        childDto.setParentId(catalog.getId());
         List<Catalog> catalogChildren = catalogDao.read(childDto);
         catalogChildren.stream().forEach(child -> catalogDao.delete(child));
-        //catalogDao.delete(catalog);
+        catalogDao.delete(catalog);
     }
 
     public void createCatalog(String catalogName, List<String>values) {
@@ -61,9 +62,9 @@ public class CatalogService {
 
         values.stream().forEach(value -> {
             Catalog child = new Catalog(value);
-            child.setParent(catalog);
+            child.setParentId(catalog.getId());
             child = createOrGetCatalog(value);
-            child.setParent(catalog);
+            child.setParentId(catalog.getId());
             catalogDao.update(child);
         });
     }
