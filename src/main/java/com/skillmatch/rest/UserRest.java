@@ -2,7 +2,12 @@ package com.skillmatch.rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.skillmatch.pojos.User;
+import com.skillmatch.services.CatalogService;
+import com.skillmatch.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,15 +20,22 @@ import javax.ws.rs.core.Response;
  * Created by agermenos on 7/6/16.
  */
 
+@Component
 @Path("user/{userId}")
 public class UserRest {
     @Autowired
+    UserService userService;
+    @Autowired
+    CatalogService catalogService;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUser(@PathParam("userId") int userId) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        return Response.status(200).entity(gson.toJson(new MyResponse("You're the best!", "Who's the best", "User " + userId))).build();
+        User user = userService.getUser(userId);
+        return Response.
+                status(Response.Status.ACCEPTED).
+                entity(gson.toJson(user))
+                .build();
     }
 }
