@@ -30,12 +30,9 @@ public class UserRest {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@PathParam("userId") int userId) {
+    public String getUser(@PathParam("userId") int userId) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         User user = userService.getUser(userId);
-        return Response.
-                status(Response.Status.ACCEPTED).
-                entity(gson.toJson(user))
-                .build();
+        return gson.toJson(user);
     }
 }
