@@ -73,15 +73,6 @@ public class User {
 
     private Set<UserSkill> userSkills;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    public Set<UserSkill> getUserSkills() {
-        return userSkills;
-    }
-
-    public void setUserSkills(Set<UserSkill> userSkills) {
-        this.userSkills = userSkills;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -11,9 +11,9 @@ import java.util.Date;
 public class UserSkill {
     private Integer id;
     private Date dateAdded;
-    private User user;
     private SkillLevel skillLevel;
     private Catalog status;
+    private Integer userId;
 
     @Id
     @SequenceGenerator(name = "pk_sequence", sequenceName = "skillmatch.user_skill_id_seq")
@@ -43,11 +43,6 @@ public class UserSkill {
     public void setSkillLevel (SkillLevel skillLevel) {this.skillLevel = skillLevel;}
 
     @ManyToOne
-    @JoinColumn(name="user_id")
-    public User getUser() {return user;}
-    public void setUser (User user) {this.user = user;}
-
-    @ManyToOne
     @JoinColumn(name="status_id")
     public Catalog getStatus() {return status;}
     public void setStatus (Catalog status) {this.status = status;}
@@ -61,7 +56,6 @@ public class UserSkill {
 
         if (!id.equals(userSkill.id)) return false;
         if (!dateAdded.equals(userSkill.dateAdded)) return false;
-        if (!user.equals(userSkill.user)) return false;
         if (!skillLevel.equals(userSkill.skillLevel)) return false;
         return status.equals(userSkill.status);
 
@@ -71,9 +65,17 @@ public class UserSkill {
     public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + dateAdded.hashCode();
-        result = 31 * result + user.hashCode();
         result = 31 * result + skillLevel.hashCode();
         result = 31 * result + status.hashCode();
         return result;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+    @Basic
+    @Column(name = "user_id", nullable = true)
+    public Integer getUserId() {
+        return this.userId;
     }
 }

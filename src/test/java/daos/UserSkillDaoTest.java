@@ -43,7 +43,7 @@ public class UserSkillDaoTest {
         userSkill.setStatus(status);
         userSkill.setDateAdded(new Date());
         userSkill.setSkillLevel(skillLevel);
-        userSkill.setUser(user);
+        userSkill.setUserId(user.getId());
         userSkillDao.create(userSkill);
         assert userSkill.getId()!=null;
     }

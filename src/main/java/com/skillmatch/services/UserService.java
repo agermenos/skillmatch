@@ -17,12 +17,7 @@ public class UserService {
     UserDao userDao;
 
     public User getUser(int userId) {
-        User user = new User();
-        user.setId(userId);
-        List<User> users = userDao.read(user);
-        assert (users.size()<1 && users.size()>0);
-
-        return users.get(0);
+        return userDao.getUserById(userId);
     }
 
 }
