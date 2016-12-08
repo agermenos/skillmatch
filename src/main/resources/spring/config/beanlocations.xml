@@ -5,8 +5,8 @@
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- Database Configuration -->
-    <import resource="../database/datasource.xml"/>
-    <import resource="../database/hibernate.xml"/>
+    <import resource="database/datasource.xml"/>
+    <import resource="database/hibernate.xml"/>
 
     <!-- Auto scan the components -->
     <context:component-scan

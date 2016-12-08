@@ -19,7 +19,7 @@ public class FibonacciNumber {
 
     public static void main(String args[]) {
         FibonacciNumber fn = new FibonacciNumber();
-        for (int k=0; k<50; k++) {
+        for (int k=0; k<8; k++) {
             System.out.print (fn.getFNumber(k) + " ");
         }
     }

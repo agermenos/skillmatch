@@ -7,7 +7,7 @@ public class InsertionSort {
     public static void main(String[] args) {
 
         int[] input = { 4, 2, 9, 6, 23, 12, 34, 0, 1 };
-        printInput(input);
+        //printInput(input);
         insertionSort(input);
         printInput(input);
     }

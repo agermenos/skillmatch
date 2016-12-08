@@ -25,7 +25,7 @@ public class ArrayIndexSum {
             for (int i=k; i<intArray.length-1; i++) {
                 Integer localSum = intArray[i] + intArray[k];
                 if (localSum==sum) {
-                    returnItems.add(new String(k+1 + ", " + (i+1)));
+                    returnItems.add(new String(intArray[k] + ", " + intArray[(i)]));
                 }
             }
         }

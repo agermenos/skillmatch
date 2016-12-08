@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
  * Created by agermenos on 5/15/16.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/spring/config/beanlocations.xml")
+@ContextConfiguration("classpath:/spring/config/beanlocations.xml")
 public class AddressDaoTest {
     @Autowired
     AddressDao addressDao;

@@ -14,7 +14,7 @@ public class WordCounter {
     }
 
     private void count(String s) {
-        StringTokenizer stringTokenizer = new StringTokenizer(s, " ,;");
+        StringTokenizer stringTokenizer = new StringTokenizer(s, " ,;.");
         System.out.println ("String {" + s + "} has " + stringTokenizer.countTokens() + " words");
     }
 }
