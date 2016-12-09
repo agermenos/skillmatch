@@ -1,4 +1,4 @@
-Adam Jennifer Hannibal Lex
-Lex Karla Gisha Mayme
-Gisha Daniel Kentaro Paul Paul_2
-Paul Luis Ginna Karen
+Adam,Jennifer,Hannibal,Lex
+Lex,Karla,Gisha,Mayme
+Gisha,Daniel,Kentaro,Paul,Paul_2
+Paul,Luis,Ginna,Karen

@@ -3,9 +3,11 @@ package com.skillmatch.tests;
 import org.junit.Test;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by agermenos on 12/8/2016.
@@ -16,19 +18,18 @@ public class FileToTree {
             FileReader reader = new FileReader(new File(fileName));
             BufferedReader br = new BufferedReader(reader);
             String line = br.readLine();
-            TNode root = new TNode("blank");
-            TNode dad = null;
+            TNode root = new TNode("");
+            TNode dad = root;
             while (line!=null){
-                String[] names = line.split(" ");
-                if (dad==null) {
-                    dad = new TNode(names[0]);
-                    root = dad;
+                String[] names = line.split(",");
+                if (root.name.isEmpty()) {
+                    root.addChildren(names);
+                    root.setName("BASE");
                 }
                 else {
-                    root = root.getChild(names[0]).isPresent()?root.getChild(names[0]).get():new TNode(names[0]);
-                }
-                for (int k=1; k<names.length; k++) {
-                    root.addChild(new TNode(names[k]));
+                    root = root.getChild(names[0]).get();
+                    root.setName(names[0]);
+                    root.addChildren(copyRange(names, 1, (names.length-1)));
                 }
                 line = br.readLine();
             }
@@ -40,6 +41,14 @@ public class FileToTree {
         }
     }
 
+    private String[] copyRange(String[] origin, int i, int i1) {
+        String[] returnValues = new String[i1];
+        for (int k=0; k<i1; k++){
+            returnValues[k]=origin[k+i];
+        }
+        return returnValues;
+    }
+
     @Test
     public void test(){
         TNode node = this.convertFile("Names.txt");
@@ -47,9 +56,8 @@ public class FileToTree {
     }
 
     private String digestNode(TNode node) {
-       String response = new String (node.name + "{\n\t");
+       String response = new String (node.name + "{");
        if (node.getChildren()!=null) {
-           response= response + ("\t C:");
            for (TNode child:node.getChildren()) {
                response = "\t" + response + digestNode(child) + " ";
            }
@@ -76,8 +84,8 @@ class TNode{
         }
         children.add(child);
     }
-    public void addChildren(Set<TNode> children){
-        this.setChildren(children);
+    public void addChildren(String[] children){
+        this.setChildren(Arrays.stream(children).map(TNode::new).collect(Collectors.toSet()));
     }
 
     public Set<TNode> getChildren() {
@@ -90,5 +98,13 @@ class TNode{
 
     public Optional<TNode> getChild(String name){
         return children.stream().filter((TNode node) -> node.name.equals(name)).findFirst();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
