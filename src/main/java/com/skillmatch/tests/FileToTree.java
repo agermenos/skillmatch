@@ -13,10 +13,12 @@ import java.util.stream.Collectors;
  * Created by agermenos on 12/8/2016.
  */
 public class FileToTree {
+    private void log(String text){
+        System.out.println(text);
+    }
+
     public TNode convertFile(String fileName){
-        try {
-            FileReader reader = new FileReader(new File(fileName));
-            BufferedReader br = new BufferedReader(reader);
+        try (BufferedReader br = new BufferedReader(new FileReader(new File(fileName)))){
             String line = br.readLine();
             TNode root = new TNode("");
             TNode dad = root;
